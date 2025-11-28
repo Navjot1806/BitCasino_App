@@ -1,59 +1,77 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/components/useColorScheme';
-
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
-
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import { Stack, useRouter, useSegments, Redirect } from 'expo-router';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { isLoggedIn, initializeDemoUser } from './utils/Database';
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
-  });
+    const [isLoading, setIsLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+    const router = useRouter();
+    const segments = useSegments();
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+    useEffect(() => {
+        checkAuth();
+    }, []);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    const checkAuth = async () => {
+        try {
+            // 1. Initialize demo user (this will create a user if the database is empty)
+            await initializeDemoUser();
+
+            // 2. Check if user is logged in (this must complete without hanging)
+            const loggedIn = await isLoggedIn();
+
+            setIsAuthenticated(loggedIn);
+
+        } catch (error) {
+            // If the database setup or check fails (e.g., AsyncStorage issue), handle the error.
+            console.error('Error during database or auth check:', error);
+            setIsAuthenticated(false); // Assume logged out on failure
+        } finally {
+            // FIX: This block always runs, ensuring the loading screen disappears.
+            // Navigation happens immediately after checking the auth status.
+            setIsLoading(false);
+        }
+    };
+
+    if (isLoading || isAuthenticated === null) {
+        // Shows the loading screen while the initial check is ongoing
+        return (
+            <View style={styles.loadingContainer}>
+                <Text style={styles.logo}>🎰</Text>
+                <ActivityIndicator size="large" color="#FFD700" />
+                <Text style={styles.loadingText}>Loading Casino...</Text>
+            </View>
+        );
     }
-  }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
+    if (isAuthenticated === true) {
+        // If logged in, redirect to the main app tabs
+        return <Redirect href="/(tabs)" />;
+    }
 
-  return <RootLayoutNav />;
+    return (
+        <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(auth)" />
+            <Stack.Screen name="(tabs)" />
+        </Stack>
+    );
 }
 
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
-  );
-}
+const styles = StyleSheet.create({
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#0a0a0a',
+    },
+    logo: {
+        fontSize: 80,
+        marginBottom: 20,
+    },
+    loadingText: {
+        color: '#FFD700',
+        marginTop: 15,
+        fontSize: 16,
+    },
+});
