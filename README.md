@@ -24,7 +24,7 @@ A full-featured dating application built with React Native and Expo.
 
 \`\`\`bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/dating-app.git
+git clone https://github.com/Navjot1806/BitCasino_App
 
 # Navigate to project
 cd dating-app
