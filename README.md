@@ -1,79 +1,82 @@
-# 💕 Dating App - React Native
+Bit Casino App
 
-A full-featured dating application built with React Native and Expo.
+This is a cross-platform mobile application built using React Native and the Expo framework. It utilizes expo-router for file-system-based navigation, providing a modern, scalable way to manage the application's screens and routes.
 
-## ✨ Features
+🚀 Key Features
+File-System Routing: Uses expo-router for simplified, declarative navigation management.
 
-- 🔥 Tinder-style swipe cards
-- 💘 Matching system
-- 💬 Real-time chat messaging
-- 📍 Location-based user discovery (5-mile radius)
-- 👤 User profiles with photos and interests
-- ⚙️ Customizable preferences (age range, distance)
-- 🔐 User authentication (login/signup)
+Tabbed Navigation: Features a main screen group with a tab bar navigation.
 
-## 🛠️ Tech Stack
+Themed Components: Includes basic support for light and dark color schemes via useColorScheme and ThemeProvider.
 
-- React Native + Expo
-- TypeScript
-- React Navigation
-- AsyncStorage (local database)
-- Expo Location API
+Modal Presentation: Includes a dedicated modal screen for information or auxiliary content.
 
-## 📱 Installation
+Error Handling: A custom +not-found.tsx screen is included for unhandled routes.
 
-\`\`\`bash
-# Clone the repository
-git clone https://github.com/Navjot1806/BitCasino_App
+🛠️ Installation
+Prerequisites
+Node.js (LTS recommended)
 
-# Navigate to project
-cd dating-app
+Yarn or npm
 
-# Install dependencies
+Expo Go app on your mobile device (optional, but recommended for quick testing)
+
+Steps
+
+1) Clone the repository:
+   
+git clone <your-repo-url>
+cd bit-casino-app
+
+2) Install Dependencies:
+
+ npm install
+
+ 
+Based on the structure and content of the provided files, which appear to be an application built with Expo and Expo Router, here is a suggested README file for your project, which you refer to as the "Bit Casino App."
+
+Bit Casino App
+This is a cross-platform mobile application built using React Native and the Expo framework. It utilizes expo-router for file-system-based navigation, providing a modern, scalable way to manage the application's screens and routes.
+
+🚀 Key Features
+File-System Routing: Uses expo-router for simplified, declarative navigation management.
+
+Tabbed Navigation: Features a main screen group with a tab bar navigation.
+
+Themed Components: Includes basic support for light and dark color schemes via useColorScheme and ThemeProvider.
+
+Modal Presentation: Includes a dedicated modal screen for information or auxiliary content.
+
+Error Handling: A custom +not-found.tsx screen is included for unhandled routes.
+
+🛠️ Installation
+Prerequisites
+Node.js (LTS recommended)
+
+Yarn or npm
+
+Expo Go app on your mobile device (optional, but recommended for quick testing)
+
+Steps
+Clone the repository:
+
+Bash
+git clone <your-repo-url>
+cd bit-casino-app
+Install Dependencies:
+
+Bash
 npm install
+# or
+yarn install
 
-# Start the app
-npx expo start
-\`\`\`
+Running the App
+After running npm start, an interactive menu will open in your terminal. You can then:
 
-## 🚀 Running the App
+Press a to open on Android.
 
-1. Install Expo Go on your phone
-2. Scan the QR code from terminal
-3. Or press 'i' for iOS simulator, 'a' for Android emulator
+Press i to open on iOS.
 
-## 👤 Demo Account
+Press w to open in the web browser.
 
-- Email: `sarah@example.com`
-- Password: `password123`
-
-## 📂 Project Structure
-
-\`\`\`
-DatingApp/
-├── app/
-│   └── _layout.tsx          # Root navigation
-├── screens/
-│   ├── LoginScreen.tsx
-│   ├── SignupScreen.tsx
-│   ├── HomeScreen.tsx       # Swipe cards
-│   ├── MatchesScreen.tsx
-│   ├── ChatListScreen.tsx
-│   ├── ChatScreen.tsx
-│   ├── ProfileScreen.tsx
-│   ├── SettingsScreen.tsx
-│   └── ActiveUsersScreen.tsx
-├── services/
-│   ├── database.ts          # Data management
-│   ├── auth.ts             # Authentication
-│   └── location.ts         # Location services
-├── components/
-│   ├── Card.tsx            # Profile card component
-│   └── ChatMessage.tsx     # Message bubble component
-└── utils/
-    └── helpers.ts          # Utility functions
-\`\`\`
-
-## 👨‍💻 Author
-
-NavjyotSingh
+Scan the QR code with the Expo Go app on your phone.
