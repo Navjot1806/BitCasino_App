@@ -147,7 +147,7 @@ export default function SignUpScreen() {
                                 value={password}
                                 onChangeText={setPassword}
                                 secureTextEntry
-                                autoComplete="password-new"
+                                autoComplete="off"
                                 contextMenuHidden={true}
                             />
                         </View>
@@ -161,7 +161,7 @@ export default function SignUpScreen() {
                                 value={confirmPassword}
                                 onChangeText={setConfirmPassword}
                                 secureTextEntry
-                                autoComplete="password-new"
+                                autoComplete="off"
                                 contextMenuHidden={true}
                             />
                         </View>

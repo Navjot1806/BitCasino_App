@@ -81,15 +81,6 @@ export default function LoginScreen() {
                         <Text style={styles.subtitle}>Login to start playing</Text>
                     </View>
 
-                    {/* Demo Account Info */}
-                    <View style={styles.demoInfo}>
-                        <Text style={styles.demoTitle}>📝 Demo Account</Text>
-                        <Text style={styles.demoText}>
-                            Email: demo@casino.com{'\n'}
-                            Password: password123
-                        </Text>
-                    </View>
-
                     {/* Login Form */}
                     <View style={styles.form}>
                         <View style={styles.inputContainer}>

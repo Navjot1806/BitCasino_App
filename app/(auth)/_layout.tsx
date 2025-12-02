@@ -41,6 +41,9 @@ let sessionData: { userEmail: string | null; } = { userEmail: null };
 export const userDB = new Map<string, User>();
 
 const initializeData = () => {
+
+    sessionData.userEmail = null;
+
     if (userDBMap.size === 0) {
         userDBMap.set('test@example.com', {
             email: 'test@example.com',
